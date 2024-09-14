@@ -22,11 +22,14 @@ from autocorrect import Speller
 
 spell = Speller(lang='en')
 
+incorrectWords = []
+
 for word in sentence_list:
     if spell(word) == word:
         correct += 1
     else:
-        incorrect +=1   
+        incorrect +=1
+        incorrectWords.append(word)   
 
 speed = (len(sentence_list) * 60)/(t2-t1)
 
@@ -35,6 +38,10 @@ if len(sentence) == 0:
 else:
     print("You have typed total",len(sentence_list),"words in",math.floor(t2-t1),"sec")
     print("Your typing speed is",math.floor(speed),"WPM")
-    print("Incorrect words",incorrect)
     print("Correct words",correct)
+    print("Incorrect words",incorrect)
+    
+    if len(incorrectWords) != 0:
+        print(incorrectWords)
+    
     print("Accuracy",correct/(incorrect+correct) * 100,"%")
